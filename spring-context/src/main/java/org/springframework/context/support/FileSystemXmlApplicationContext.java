@@ -135,16 +135,21 @@ public class FileSystemXmlApplicationContext extends AbstractXmlApplicationConte
 	public FileSystemXmlApplicationContext(
 			String[] configLocations, boolean refresh, @Nullable ApplicationContext parent)
 			throws BeansException {
-
+		// 动态地确定用哪个加载器去加载我们的配置文件
 		super(parent);
+		// 设置配置文件加载路径
 		setConfigLocations(configLocations);
 		if (refresh) {
+			// 容器初始化
 			refresh();
 		}
 	}
 
 
 	/**
+	 * 实例化一个 FileSystemResource 并返回，以便后续对资源的 IO 操作
+	 * 本方法是在其父类 DefaultResourceLoader 的 getResource 方法中被调用的
+	 *
 	 * Resolve resource paths as file system paths.
 	 * <p>Note: Even if a given path starts with a slash, it will get
 	 * interpreted as relative to the current VM working directory.

@@ -36,6 +36,8 @@ include "spring-websocket"
 include "framework-bom"
 include "integration-tests"
 
+include 'spring-test-sgj'
+
 rootProject.name = "spring"
 rootProject.children.each {project ->
 	project.buildFileName = "${project.name}.gradle"
@@ -55,3 +57,5 @@ settings.gradle.projectsLoaded {
 		}
 	}
 }
+
+

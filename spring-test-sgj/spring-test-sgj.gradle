@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+}
+
+group 'org.springframework'
+version '5.3.22-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    optional("junit:junit")
+    optional("org.hamcrest:hamcrest")
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    api(project(":spring-core"))
+    optional(project(":spring-aop"))
+    optional(project(":spring-beans"))
+    optional(project(":spring-context"))
+    optional(project(":spring-jdbc"))
+    optional(project(":spring-orm"))
+    optional(project(":spring-tx"))
+    optional(project(":spring-web"))
+    optional(project(":spring-webflux"))
+    optional(project(":spring-webmvc"))
+    optional(project(":spring-websocket"))
+
+    testImplementation(project(":spring-context-support"))
+    testImplementation(project(":spring-oxm"))
+    testImplementation(testFixtures(project(":spring-beans")))
+    testImplementation(testFixtures(project(":spring-context")))
+    testImplementation(testFixtures(project(":spring-core")))
+    testImplementation(testFixtures(project(":spring-tx")))
+    testImplementation(testFixtures(project(":spring-web")))
+}
+
+test {
+    useJUnitPlatform()
+}
