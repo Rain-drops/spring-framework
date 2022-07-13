@@ -1,4 +1,4 @@
-package org.springframework.testsgj.bean;
+package org.springframework.testsgj.ioc.bean;
 
 public class Address {
 	private String city;

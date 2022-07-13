@@ -1321,10 +1321,12 @@ public abstract class ClassUtils {
 	 * @see #getMostSpecificMethod
 	 */
 	public static Method getInterfaceMethodIfPossible(Method method, @Nullable Class<?> targetClass) {
+		// 1. 是不是 public , 2. 是不是 接口
 		if (!Modifier.isPublic(method.getModifiers()) || method.getDeclaringClass().isInterface()) {
 			return method;
 		}
 		// Try cached version of method in its declaring class
+		// 放入init-method 缓存
 		Method result = interfaceMethodCache.computeIfAbsent(method,
 				key -> findInterfaceMethodIfPossible(key, key.getDeclaringClass(), Object.class));
 		if (result == method && targetClass != null) {
@@ -1339,9 +1341,11 @@ public abstract class ClassUtils {
 	private static Method findInterfaceMethodIfPossible(Method method, Class<?> startClass, Class<?> endClass) {
 		Class<?> current = startClass;
 		while (current != null && current != endClass) {
+			// 当前类的 接口列表
 			Class<?>[] ifcs = current.getInterfaces();
 			for (Class<?> ifc : ifcs) {
 				try {
+					// 从接口中获取方法
 					return ifc.getMethod(method.getName(), method.getParameterTypes());
 				}
 				catch (NoSuchMethodException ex) {

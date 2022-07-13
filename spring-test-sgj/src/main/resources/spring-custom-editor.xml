@@ -9,7 +9,7 @@
 	   https://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!--    待属性编辑的bean，value代表的就是string类型-->
-	<bean class="org.springframework.testsgj.bean.Person" id="person">
+	<bean class="org.springframework.testsgj.ioc.bean.Person" id="person">
 		<property name="name" value="李华"/>
 		<property name="address" value="四川,成都"/>
 	</bean>

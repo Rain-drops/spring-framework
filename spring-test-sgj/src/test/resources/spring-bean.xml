@@ -10,7 +10,7 @@
       http://www.springframework.org/schema/mvc
       https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	<bean id="testBean" class="org.springframework.testsgj.bean.TestBean"></bean>
+	<bean id="testBean" class="org.springframework.testsgj.ioc.bean.TestBean"></bean>
 
 
 </beans>

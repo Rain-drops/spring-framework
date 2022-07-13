@@ -4,7 +4,7 @@ package org.springframework.testsgj;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.testsgj.bean.Person;
+import org.springframework.testsgj.ioc.bean.Person;
 
 
 public class TestBeanFactoryBeanPostProcessor {

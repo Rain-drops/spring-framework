@@ -154,18 +154,25 @@ public class DefaultResourceLoader implements ResourceLoader {
 		}
 
 		if (location.startsWith("/")) {
+			// 在 FileSystemXmlApplicationContext 中实现
 			return getResourceByPath(location);
 		}
+		// 如果 location 是类路径的方式，返回 ClassPathResource 类型的文件资源对象
 		else if (location.startsWith(CLASSPATH_URL_PREFIX)) {
 			return new ClassPathResource(location.substring(CLASSPATH_URL_PREFIX.length()), getClassLoader());
 		}
 		else {
 			try {
+				// 如果是 URL 方式，返回 UrlResource 类型的文件资源对象，
+				// 否则将抛出的异常进入 catch 代码块，返回另一种资源对象
 				// Try to parse the location as a URL...
 				URL url = new URL(location);
 				return (ResourceUtils.isFileURL(url) ? new FileUrlResource(url) : new UrlResource(url));
 			}
 			catch (MalformedURLException ex) {
+				// 如果既不是 classpath 标识，又不是 URL 标识的 Resource 定位，则调用容器本身的
+				// getResourceByPath() 方法获取 Resource。根据实例化的子类对象，调用其子类对象中
+				// 重写的此方法，如 FileSystemXmlApplicationContext 子类中对此方法的重写
 				// No URL -> resolve as resource path.
 				return getResourceByPath(location);
 			}

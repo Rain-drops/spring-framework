@@ -1,6 +1,6 @@
 package org.springframework.testsgj.config;
 
-import org.springframework.testsgj.bean.Address;
+import org.springframework.testsgj.ioc.bean.Address;
 
 import java.beans.PropertyEditorSupport;
 

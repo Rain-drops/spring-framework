@@ -72,6 +72,14 @@ public class CglibSubclassingInstantiationStrategy extends SimpleInstantiationSt
 	private static final int METHOD_REPLACER = 2;
 
 
+	/**
+	 * 下面两个方法都通过实例化自己的私有静态内部类 CglibSubclassCreator，
+	 * 然后调用该内部类对象的实例化方法 instantiate() 完成实例化
+	 * @param bd
+	 * @param beanName
+	 * @param owner
+	 * @return
+	 */
 	@Override
 	protected Object instantiateWithMethodInjection(RootBeanDefinition bd, @Nullable String beanName, BeanFactory owner) {
 		return instantiateWithMethodInjection(bd, beanName, owner, null);
@@ -87,6 +95,8 @@ public class CglibSubclassingInstantiationStrategy extends SimpleInstantiationSt
 
 
 	/**
+	 * 为避免 3.2 之前的 Spring 版本中的外部 cglib 依赖而创建的内部类。
+	 *
 	 * An inner class created for historical reasons to avoid external CGLIB dependency
 	 * in Spring versions earlier than 3.2.
 	 */
@@ -105,6 +115,8 @@ public class CglibSubclassingInstantiationStrategy extends SimpleInstantiationSt
 		}
 
 		/**
+		 * 使用 CGLIB 进行 bean对象 实例化
+		 *
 		 * Create a new instance of a dynamically generated subclass implementing the
 		 * required lookups.
 		 * @param ctor constructor to use. If this is {@code null}, use the
@@ -143,7 +155,9 @@ public class CglibSubclassingInstantiationStrategy extends SimpleInstantiationSt
 		 * definition, using CGLIB.
 		 */
 		private Class<?> createEnhancedSubclass(RootBeanDefinition beanDefinition) {
+			// 实例化 Enhancer对象，并为 Enhancer对象 设置父类，生成 Java 对象的参数，比如：基类、回调方法等
 			Enhancer enhancer = new Enhancer();
+			// 将 bean 本身作为其父类
 			enhancer.setSuperclass(beanDefinition.getBeanClass());
 			enhancer.setNamingPolicy(SpringNamingPolicy.INSTANCE);
 			if (this.owner instanceof ConfigurableBeanFactory) {

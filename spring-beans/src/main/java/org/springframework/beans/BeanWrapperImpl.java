@@ -216,6 +216,7 @@ public class BeanWrapperImpl extends AbstractNestablePropertyAccessor implements
 		if (td == null) {
 			td = cachedIntrospectionResults.addTypeDescriptor(pd, new TypeDescriptor(property(pd)));
 		}
+		// 最终肯定会走到AddressParse这个核心处理
 		return convertForProperty(propertyName, null, value, td);
 	}
 
@@ -227,6 +228,7 @@ public class BeanWrapperImpl extends AbstractNestablePropertyAccessor implements
 	@Override
 	@Nullable
 	protected BeanPropertyHandler getLocalPropertyHandler(String propertyName) {
+		// 获取属性的描述符
 		PropertyDescriptor pd = getCachedIntrospectionResults().getPropertyDescriptor(propertyName);
 		return (pd != null ? new BeanPropertyHandler(pd) : null);
 	}
@@ -289,13 +291,16 @@ public class BeanWrapperImpl extends AbstractNestablePropertyAccessor implements
 		@Override
 		@Nullable
 		public Object getValue() throws Exception {
+			// 获取属性的 getter 方法
 			Method readMethod = this.pd.getReadMethod();
 			if (System.getSecurityManager() != null) {
+				// 匿名内部类，根据权限修改属性的读取控制限制
 				AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
 					ReflectionUtils.makeAccessible(readMethod);
 					return null;
 				});
 				try {
+					// 属性没有提供 getter 方法时，调用潜在的读取属性值的方法，获取属性值
 					return AccessController.doPrivileged((PrivilegedExceptionAction<Object>)
 							() -> readMethod.invoke(getWrappedInstance(), (Object[]) null), acc);
 				}

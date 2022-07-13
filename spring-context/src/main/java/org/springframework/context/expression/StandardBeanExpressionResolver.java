@@ -145,11 +145,15 @@ public class StandardBeanExpressionResolver implements BeanExpressionResolver {
 		try {
 			Expression expr = this.expressionCache.get(value);
 			if (expr == null) {
+				// el表达式解析
 				expr = this.expressionParser.parseExpression(value, this.beanExpressionParserContext);
+				// 解析结果放入缓存
 				this.expressionCache.put(value, expr);
 			}
+			// spring 中默认的表达式上下文
 			StandardEvaluationContext sec = this.evaluationCache.get(beanExpressionContext);
 			if (sec == null) {
+				// 设置属性
 				sec = new StandardEvaluationContext(beanExpressionContext);
 				sec.addPropertyAccessor(new BeanExpressionContextAccessor());
 				sec.addPropertyAccessor(new BeanFactoryAccessor());

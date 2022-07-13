@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+      https://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      https://www.springframework.org/schema/context/spring-context.xsd
+      http://www.springframework.org/schema/mvc
+      https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+	<!--  静态方法-->
+	<bean id="static-method-user"
+		  class="org.springframework.testsgj.ioc.bean.UserBean"
+		  factory-method="createInstance" init-method="initMethod">
+		<property name="age" value="30"/>
+	</bean>
+
+	<!--  工厂方法创建-->
+	<bean id="factory-user" class="org.springframework.testsgj.ioc.bean.UserBean"
+		  factory-bean="userFactory" factory-method="factory"></bean>
+	<!--user 工厂bean-->
+	<bean id="userFactory"
+		  class="org.springframework.testsgj.ioc.bean.UserBeanFactoryImpl"/>
+	<!--factory bean-->
+	<bean id="factory-bean-user"
+		  class="org.springframework.testsgj.ioc.bean.UserFactoryBean"/>
+	<alias name="factory-bean-user" alias="userFactoryBean"/>
+
+	<bean class="org.springframework.testsgj.ioc.bean.SystemUserBean">
+		<property name="userBean" ref="factory-user"/>
+	</bean>
+
+</beans>

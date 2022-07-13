@@ -4,7 +4,7 @@ package org.springframework.testsgj;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
-import org.springframework.testsgj.bean.TestBean;
+import org.springframework.testsgj.ioc.bean.TestBean;
 
 
 public class TestFileSystemXmlApplicationContext {

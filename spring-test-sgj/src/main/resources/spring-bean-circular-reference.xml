@@ -10,7 +10,13 @@
       http://www.springframework.org/schema/mvc
       https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	<bean id="testBean" class="org.springframework.testsgj.ioc.bean.TestBean"></bean>
 
+
+	<bean id="a" class="org.springframework.testsgj.ioc.bean.AClass">
+		<property name="bClass" ref="b"/>
+	</bean>
+	<bean id="b" class="org.springframework.testsgj.ioc.bean.BClass">
+		<property name="aClass" ref="a"/>
+	</bean>
 
 </beans>

@@ -2,7 +2,7 @@ package org.springframework.testsgj.config;
 
 import org.springframework.beans.PropertyEditorRegistrar;
 import org.springframework.beans.PropertyEditorRegistry;
-import org.springframework.testsgj.bean.Address;
+import org.springframework.testsgj.ioc.bean.Address;
 
 public class MyCustomEditor implements PropertyEditorRegistrar {
 	@Override
