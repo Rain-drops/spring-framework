@@ -36,3 +36,9 @@ tasks.named('compileKotlin') {
 	// Kotlin also depends on the result of Groovy compilation
 	classpath += files(sourceSets.main.groovy.classesDirectory)
 }
+tasks.withType(JavaCompile) {
+	options.encoding = "UTF-8"
+}
+tasks.withType(Javadoc) {
+	options.encoding = "UTF-8"
+}

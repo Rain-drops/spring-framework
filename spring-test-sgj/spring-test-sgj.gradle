@@ -9,11 +9,15 @@ repositories {
     mavenCentral()
 }
 
+
+
 dependencies {
+
     optional("junit:junit")
     optional("org.hamcrest:hamcrest")
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
 
     api(project(":spring-core"))
     optional(project(":spring-aop"))
@@ -38,4 +42,10 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+tasks.withType(Javadoc) {
+    options.encoding = "UTF-8"
 }
