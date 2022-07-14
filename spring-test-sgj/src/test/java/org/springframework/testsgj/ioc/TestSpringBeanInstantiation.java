@@ -1,4 +1,4 @@
-package org.springframework.testsgj;
+package org.springframework.testsgj.ioc;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

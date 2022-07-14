@@ -1,4 +1,4 @@
-package org.springframework.testsgj;
+package org.springframework.testsgj.ioc;
 
 
 import org.junit.jupiter.api.Test;

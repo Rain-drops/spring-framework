@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+      https://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      https://www.springframework.org/schema/context/spring-context.xsd
+      http://www.springframework.org/schema/mvc
+      https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- 定义自己的 Advisor 实现，其中包含了 Pointcut 和 Advice -->
+	<bean id="myAdvisor" class="org.springframework.testsgj.aop.bean.MyAdvisor"/>
+
+	<bean id="myAOP" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<!-- 代理类实现的接口 -->
+		<property name="proxyInterfaces">
+			<value>org.springframework.testsgj.aop.bean.ProxyInterface</value>
+		</property>
+		<!-- 被代理的对象 -->
+		<property name="target">
+			<bean class="org.springframework.testsgj.aop.bean.MyTarget"/>
+		</property>
+		<!-- 配置相应的 Advisor -->
+		<property name="interceptorNames">
+			<list><value>myAdvisor</value></list>
+		</property>
+	</bean>
+
+
+</beans>
