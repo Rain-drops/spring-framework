@@ -71,7 +71,10 @@ public class AdvisedSupport extends ProxyConfig implements Advised {
 	public static final TargetSource EMPTY_TARGET_SOURCE = EmptyTargetSource.INSTANCE;
 
 
-	/** Package-protected to allow direct access for efficiency. */
+	/**
+	 * TargetSource持有一个比较重要的属性，targetClass
+	 * Package-protected to allow direct access for efficiency.
+	 */
 	TargetSource targetSource = EMPTY_TARGET_SOURCE;
 
 	/** Whether the Advisors are already filtered for the specific target class. */
@@ -80,7 +83,10 @@ public class AdvisedSupport extends ProxyConfig implements Advised {
 	/** The AdvisorChainFactory to use. */
 	AdvisorChainFactory advisorChainFactory = new DefaultAdvisorChainFactory();
 
-	/** Cache with Method as key and advisor chain List as value. */
+	/**
+	 * 缓存 Method对象 和其对应的 拦截器链列表List<Advisor>
+	 * Cache with Method as key and advisor chain List as value.
+	 */
 	private transient Map<MethodCacheKey, List<Object>> methodCache;
 
 	/**
@@ -457,6 +463,7 @@ public class AdvisedSupport extends ProxyConfig implements Advised {
 
 
 	/**
+	 * 获取拦截器链，为提高效率，同时设置了缓存
 	 * Determine a list of {@link org.aopalliance.intercept.MethodInterceptor} objects
 	 * for the given method, based on this configuration.
 	 * @param method the proxied method
@@ -464,11 +471,15 @@ public class AdvisedSupport extends ProxyConfig implements Advised {
 	 * @return a List of MethodInterceptors (may also include InterceptorAndDynamicMethodMatchers)
 	 */
 	public List<Object> getInterceptorsAndDynamicInterceptionAdvice(Method method, @Nullable Class<?> targetClass) {
+		// 如果 缓存methodCache 中有就从缓存中获取 该Method对象 对应的拦截器链
+		// 没有，则调用 (DefaultAdvisorChainFactory)advisorChainFactory 的
+		// getInterceptorsAndDynamicInterceptionAdvice() 方法进行获取，并缓存到 methodCache 中
 		MethodCacheKey cacheKey = new MethodCacheKey(method);
 		List<Object> cached = this.methodCache.get(cacheKey);
 		if (cached == null) {
 			cached = this.advisorChainFactory.getInterceptorsAndDynamicInterceptionAdvice(
 					this, method, targetClass);
+			// 缓存中没有，则从 AdvisorChainFactory 中获取，然后放进缓存
 			this.methodCache.put(cacheKey, cached);
 		}
 		return cached;

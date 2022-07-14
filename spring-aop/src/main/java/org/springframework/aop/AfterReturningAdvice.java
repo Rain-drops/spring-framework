@@ -31,6 +31,7 @@ import org.springframework.lang.Nullable;
 public interface AfterReturningAdvice extends AfterAdvice {
 
 	/**
+	 * 目标方法 method 执行后，AOP 会回调此方法，注意，它还传入了 method 的返回值
 	 * Callback after a given method successfully returned.
 	 * @param returnValue the value returned by the method, if any
 	 * @param method the method being invoked

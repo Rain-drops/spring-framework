@@ -17,6 +17,7 @@
 package org.aopalliance.aop;
 
 /**
+ * 本接口定义了切面的增强方式，如：前置增强 BeforeAdvice，后置增强 AfterAdvice，异常增强 ThrowsAdvice 等。
  * Tag interface for Advice. Implementations can be any type
  * of advice, such as Interceptors.
  *

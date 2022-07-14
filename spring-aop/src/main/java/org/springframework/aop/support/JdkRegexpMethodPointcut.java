@@ -21,6 +21,7 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 /**
+ * 通过正则表达式对方法名进行匹配
  * Regular expression pointcut based on the {@code java.util.regex} package.
  * Supports the following JavaBean properties:
  * <ul>

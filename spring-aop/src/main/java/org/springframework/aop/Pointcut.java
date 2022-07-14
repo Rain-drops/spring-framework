@@ -17,6 +17,7 @@
 package org.springframework.aop;
 
 /**
+ * 本接口用来定义需要增强的目标方法的集合，一般使用正则表达式去匹配筛选指定范围内的所有满足条件的目标方法.
  * Core Spring pointcut abstraction.
  *
  * <p>A pointcut is composed of a {@link ClassFilter} and a {@link MethodMatcher}.

@@ -326,6 +326,7 @@ public abstract class AopUtils {
 	}
 
 	/**
+	 * 使用 spring 的反射机制，调用目标方法 method 的 invoke 方法
 	 * Invoke the given target via reflection, as part of an AOP method invocation.
 	 * @param target the target object
 	 * @param method the method to invoke
@@ -340,7 +341,9 @@ public abstract class AopUtils {
 
 		// Use reflection to invoke the method.
 		try {
+			// 如果该 method 是 private的，则将其访问权限设为 public的
 			ReflectionUtils.makeAccessible(method);
+			// 最后利用反射完成调用
 			return method.invoke(target, args);
 		}
 		catch (InvocationTargetException ex) {
